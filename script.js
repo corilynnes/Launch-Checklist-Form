@@ -1,11 +1,7 @@
-// Write your JavaScript code here!
 window.addEventListener("load", function () {
    console.log('window loaded');
 
-
-
-
-
+  
 
    let launchStatusCheck = document.getElementById("launchStatusCheck");
    let form = document.querySelector("form");
@@ -25,18 +21,45 @@ window.addEventListener("load", function () {
          event.preventDefault();
       }
 
-   });
-   
 
+      if (isNaN(fuelInput.value) === false && isNaN(cargoInput.value) === false && isNaN(pilotInput.value) === true && isNaN(copilotInput.value) === true) {
+         event.preventDefault();
+
+
+         let launchStatus = "green";
+         let launchStatusUpdate = "Shuttle is ready for launch";
+         let faultyItemsStatus = "faultyItemsShow";
+         let fuelStatus = "Fuel level high enough for launch";
+         let cargoStatus = "Cargo mass low enough for launch";
+
+         if (Number(fuelInput.value) < 10000) {
+            launchStatus = "red"
+            launchStatusUpdate = "Shuttle not ready for launch"
+            faultyItemsStatus = "faultyItemsShow"
+            fuelStatus = "Fuel level not high enough for launch";
+         }
+
+         if (Number(cargoInput.value) > 10000) {
+            launchStatus = "red"
+            launchStatusUpdate = "Shuttle not ready for launch"
+            faultyItemsStatus = "faultyItemsShow"
+            cargoStatus = "Cargo mass too high for launch";
+         }
+
+
+         let requirements = "";
+         requirements = `<h2 id=${launchStatus}>${launchStatusUpdate}</h2>
+      <div id=${faultyItemsStatus}>
+          <ol>
+              <li id="pilotStatus">Pilot ${pilotInput.value} Ready</li>
+              <li id="copilotStatus">Co-pilot ${copilotInput.value} Ready</li>
+              <li id="fuelStatus">${fuelStatus}</li>
+              <li id="cargoStatus">${cargoStatus}</li>
+          </ol>
+      </div>`
+
+         console.log(requirements);
+         launchStatusCheck.innerHTML = requirements;
+      }
+   });
 });
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${}">
-*/

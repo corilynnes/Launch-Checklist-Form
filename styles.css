@@ -10,7 +10,7 @@ div {
     visibility: hidden;   
 }
 
-/* #faultyItemsShow {
+#faultyItemsShow {
     visibility: visible;   
 }
 
@@ -20,7 +20,7 @@ div {
 
 #green {
     color:green
-} */
+}
 
 #launchForm {
     background-color: #ECF0F1;
