@@ -1,7 +1,25 @@
 window.addEventListener("load", function () {
    console.log('window loaded');
 
-  
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
+      response.json().then(function (json) {
+         let missionTarget = document.getElementById("missionTarget");
+
+         let destination = "";
+         let planet = json[Math.floor(Math.random() * json.length)];
+         destination = `<h2>Mission Destination</h2>
+         <ol>
+         <li>Name: ${planet.name}</li>
+         <li>Diameter: ${planet.diameter}</li>
+         <li>Star: ${planet.star}</li>
+         <li>Distance from Earth: ${planet.distance}</li>
+         <li>Number of Moons: ${planet.moons}</li>
+         </ol>
+         <img src="${planet.image}">`;
+
+         missionTarget.innerHTML = destination;
+      });
+   });
 
    let launchStatusCheck = document.getElementById("launchStatusCheck");
    let form = document.querySelector("form");
@@ -27,21 +45,21 @@ window.addEventListener("load", function () {
 
 
          let launchStatus = "green";
-         let launchStatusUpdate = "Shuttle is ready for launch";
+         let launchStatusUpdate = "Shuttle Is Ready For Launch";
          let faultyItemsStatus = "faultyItemsShow";
          let fuelStatus = "Fuel level high enough for launch";
          let cargoStatus = "Cargo mass low enough for launch";
 
          if (Number(fuelInput.value) < 10000) {
             launchStatus = "red"
-            launchStatusUpdate = "Shuttle not ready for launch"
+            launchStatusUpdate = "Shuttle Is Not Ready For Launch"
             faultyItemsStatus = "faultyItemsShow"
             fuelStatus = "Fuel level not high enough for launch";
          }
 
          if (Number(cargoInput.value) > 10000) {
             launchStatus = "red"
-            launchStatusUpdate = "Shuttle not ready for launch"
+            launchStatusUpdate = "Shuttle Is Not Ready For Launch"
             faultyItemsStatus = "faultyItemsShow"
             cargoStatus = "Cargo mass too high for launch";
          }
